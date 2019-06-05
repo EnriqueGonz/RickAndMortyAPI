@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import './personajes.dart';
+import './cargador.dart';
 
-class Welcome extends StatefulWidget{
+class Welcome extends StatefulWidget {
   @override
   _WelcomeState createState() => new _WelcomeState();
 }
@@ -14,7 +14,6 @@ class _WelcomeState extends State<Welcome> {
   var id;
   List data;
   var url2;
-
 
   Future<String> getRMData() async {
     var res = await http
@@ -59,19 +58,22 @@ class _WelcomeState extends State<Welcome> {
                           ),
                           onPressed: () {
                             id = data[index]["id"];
-                            url2='https://rickandmortyapi.com/api/character/'+id.toString();
+                            url2 =
+                                'https://rickandmortyapi.com/api/character/' +
+                                    id.toString();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Personajes(id,url2)),
-                            );
-                          },
-                        )
-                    ),
+                              MaterialPageRoute(
+                                  builder: (context) => Cargador(url2)),
+                            ); //Navigator
+                          }, //OnPressed
+                        ) //FlatButton
+                        ), //Container
                   ), //card
                 ],
-              ),
-            ),
-          );
+              ), //Colum
+            ), //Center
+          ); //Container
         },
       ), //Listview
     ); //Scaffold
@@ -83,4 +85,3 @@ class _WelcomeState extends State<Welcome> {
     this.getRMData();
   }
 }
-

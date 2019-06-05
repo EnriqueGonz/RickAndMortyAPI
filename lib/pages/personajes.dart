@@ -3,10 +3,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+
 class Personajes extends StatefulWidget{
-  final int id;
   var url2;
-  Personajes(this.id,this.url2);
+  Personajes(this.url2);
   @override
   _PersonajesState createState() => new _PersonajesState();
 }
@@ -34,6 +34,7 @@ class _PersonajesState extends State<Personajes> {
       appBar: AppBar(
         title: Text(data["id"].toString()),
         backgroundColor: Colors.green,
+
       ),
       body: Center(
         child: Column(
@@ -72,16 +73,27 @@ class _PersonajesState extends State<Personajes> {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.w200,fontSize: 20.0),
               ),
+            ),
+            Card(
+              child: Text("-",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.w200,fontSize: 20.0),
+              ),
+            ),
+            Card(
+              child: Text(data["url"],
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.w200,fontSize: 20.0),
+              ),
             )
           ],
-        ),
-      )
-    );
+        ),//Colum
+      )//Center
+    );//Scaffold
   }
   @override
   void initState() {
     this.getRMData();
     super.initState();
   }
-
 }
