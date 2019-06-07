@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './cargador.dart';
+import './personajes.dart';
 
 class Welcome extends StatefulWidget {
   @override
@@ -29,6 +32,24 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: Image.asset('assets/logodrawer.png',
+              scale: 0.1,
+              ),
+            ),
+            ListTile(
+              title: Text("Cerrar sesion"),
+              trailing: Icon(Icons.close),
+              onTap: (){
+                exit(0);
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text("Rick and Morty"),
         backgroundColor: Colors.green,
@@ -64,7 +85,7 @@ class _WelcomeState extends State<Welcome> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Cargador(url2)),
+                                  builder: (context) => Personajes(url2)),
                             ); //Navigator
                           }, //OnPressed
                         ) //FlatButton
@@ -79,7 +100,8 @@ class _WelcomeState extends State<Welcome> {
     ); //Scaffold
   }
 
-  @override
+
+    @override
   void initState() {
     super.initState();
     this.getRMData();

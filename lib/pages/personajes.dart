@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import './welcome.dart';
+import './cargador.dart';
 
 
 class Personajes extends StatefulWidget{
@@ -13,7 +15,8 @@ class Personajes extends StatefulWidget{
 
 class _PersonajesState extends State<Personajes> {
   var data;
-  var id;
+  bool load =false;
+
 
   Future<String> getRMData() async {
     var res = await http
@@ -25,16 +28,18 @@ class _PersonajesState extends State<Personajes> {
       print(widget.url2);
 
     });
+    load = true;
     return "Success!";
   }
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(
+    return load == true ?
+      Scaffold(
       appBar: AppBar(
-        title: Text(data["id"].toString()),
+        title: Text('                                     '+data["id"].toString()),
         backgroundColor: Colors.green,
-
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(
@@ -88,12 +93,24 @@ class _PersonajesState extends State<Personajes> {
             )
           ],
         ),//Colum
-      )//Center
-    );//Scaffold
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.push(context,
+          MaterialPageRoute(
+              builder: (context) => Welcome()),
+        );
+      },
+        child: Icon(Icons.home),
+        backgroundColor: Colors.green,
+      ),
+    //Center
+    ):Cargador()
+
+    ;//Scaffold
   }
   @override
   void initState() {
-    this.getRMData();
     super.initState();
+    this.getRMData( );
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import './personajes.dart';
+import 'dart:async';
 
 
 
 class Cargador extends StatefulWidget {
-  final String url2;
-  Cargador(this.url2);
+
   @override
   _CargadorState createState() => new _CargadorState();
 
@@ -19,16 +19,7 @@ class _CargadorState extends State<Cargador> {
     return new Scaffold(
 
       backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
-
       body: new Center(
-        child: FlatButton(onPressed: () async {
-          await new Future.delayed(const Duration(seconds: 1));
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Personajes(widget.url2)),
-          ); //Navigator
-        },
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -44,8 +35,7 @@ class _CargadorState extends State<Cargador> {
             ],
           ),
         ),
-        ),
       );
-
   }
 }
+
